@@ -6,7 +6,6 @@
 //--
 //---------------------------------------------------------------------------------------------
 //includes
-use <Chamfers-for-OpenSCAD/Chamfer.scad>;
 use <openscad_libraries/Stepper.scad>; //use doesn't executes functions in the file
 
 $fn = 80; //10 for development /80
@@ -86,7 +85,6 @@ module mainRoll()
 
     translate([0,0,BoarderThickness])
     {
-      //  chamferCylinder(height = SpoolCore, radius = InnerRadius, chamferHeight =-OuterRadius, chamferHeight2= -OuterRadius, angle = 0, quality = 0.5);
         cylinder(h = SpoolCore/3, r1=OuterRadius, r2=InnerRadius);
     translate([0,0,SpoolCore/3])
         cylinder(h = SpoolCore/3, r1=InnerRadius, r2=InnerRadius);
@@ -125,9 +123,9 @@ module bearingHole()
 
 module ropeHole()
 {
-    chamferCylinder(height = InnerRadius, radius = RopeRadius, chamferHeight =0, chamferHeight2=-1, angle = 0, quality = 0.5);
+    cylinder(h=InnerRadius, r=RopeRadius);
     translate([0,0,-InnerRadius])
-        cylinder(InnerRadius,RopeRadius*2,RopeRadius*2);
+        cylinder(InnerRadius,RopeRadius*2);
 }
 
 module spoolHolder()
@@ -165,8 +163,7 @@ module mountingBlock()
  {
     difference()
     {
-        chamferCube(BlockWidth, BlockLenght, BlockThickness, chamferX = [0, 0, 1, 1], chamferY = [0, 1, 1, 0], chamferZ = [1, 1, 1, 1] );
-        //cube([BlockWidth, BlockLenght, BlockThickness]);
+        cube([BlockWidth, BlockLenght, BlockThickness]);
         translate([BlockWidth/4,DefaultHolderThickness/2,0])
             cube([2*BlockWidth/4, BlockLenght-DefaultHolderThickness,BlockThickness]);
     }
@@ -174,7 +171,7 @@ module mountingBlock()
 
  module holderBlock(HolderThickness = DefaultHolderThickness, HolderHeight = DefaultHolderHeight)
  {
-     chamferCube(HolderWidth, HolderThickness, HolderHeight);
+     cube([HolderWidth, HolderThickness, HolderHeight]);
  } 
 
  module electricHolder()
