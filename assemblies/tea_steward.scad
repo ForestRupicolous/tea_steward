@@ -6,9 +6,9 @@
 //--
 //---------------------------------------------------------------------------------------------
 //includes
-use <../vitamins/Stepper.scad>; //use doesn't executes functions in the file
+use <../vitamins/stepper_28BYJ.scad>; //use doesn't executes functions in the file
 
-$fn = 80; //10 for development /80
+$fn = 10; //10 for development /80
 //variables
 OuterRadius = 16;
 InnerRadius = 8;
@@ -40,6 +40,7 @@ difference()
     SpoolAndHolder();
     stepperHolder();
 }
+stepperHolder();
 
 //electricHolder();
 //###########
@@ -48,8 +49,8 @@ difference()
 //modules
 module SpoolAndHolder()
 {
-   // translate([HolderWidth/2,DefaultHolderThickness+BearingInnerRing,HolderAxis]) rotate([-90,0,0]) //deactivate for printing
-   //     spool();
+    translate([HolderWidth/2,DefaultHolderThickness+BearingInnerRing,HolderAxis]) rotate([-90,0,0]) //deactivate for printing
+        spool();
     spoolHolder();
 }
 

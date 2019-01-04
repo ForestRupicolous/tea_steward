@@ -1,5 +1,7 @@
+// Model of cheap stepper motor 28BYJ 
+// Include with use function to avoid calling top geometry
 
-$fn=100;
+$fn=50;
 
 module 28BYJ() {
     difference() {
