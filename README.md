@@ -1,2 +1,2 @@
-# tea_steward
+# Tea steward
 3D printed automatic tea steeper designed in OpenSCAD
