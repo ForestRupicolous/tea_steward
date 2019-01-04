@@ -6,7 +6,7 @@
 //--
 //---------------------------------------------------------------------------------------------
 //includes
-use <openscad_libraries/Stepper.scad>; //use doesn't executes functions in the file
+use <../vitamins/Stepper.scad>; //use doesn't executes functions in the file
 
 $fn = 80; //10 for development /80
 //variables
