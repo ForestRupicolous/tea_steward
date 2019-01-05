@@ -69,13 +69,6 @@ module bearingInnerPart()
     cylinder(BearingInnerRing,BearingInnerRadius+1,BearingInnerRadius+1);
 }
 
-module bearingHole()
-{
-    cylinder(BearingHeight+Tolerance, BearingOuterRadius+Tolerance, BearingOuterRadius+Tolerance);
-    translate([0,0,BearingHeight])
-        cylinder(BearingHeight/4, BearingOuterRadius+Tolerance, BearingInnerRadius+Tolerance);
-}
-
 module ropeHole()
 {
     cylinder(h=InnerRadius, r=RopeRadius);
