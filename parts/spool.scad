@@ -4,18 +4,10 @@ use <../vitamins/bearing.scad>;
 //variables
 OuterRadius = 16;
 InnerRadius = 8;
-//BearingInnerRadius = 7.9/2;
-//BearingInnerRing = 3;
-//BearingOuterRadius = 22/2;
-//BearingHeight = 7;
 BearingInnerRadius = bearingInnerDiameter(608)/2;
 BearingInnerRing = 3;
 BearingOuterRadius = bearingOuterDiameter(608)/2;
 BearingHeight = bearingWidth(608);
-
-echo (BearingInnerRadius);
-echo (BearingOuterRadius);
-echo (BearingHeight);
 
 SpoolCoreLenght = 30;
 RingHeight = 1.5;
