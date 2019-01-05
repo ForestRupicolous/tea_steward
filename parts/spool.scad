@@ -4,10 +4,11 @@ use <../vitamins/bearing.scad>;
 //variables
 OuterRadius = 16;
 InnerRadius = 8;
-BearingInnerRadius = bearingInnerDiameter(608)/2;
-BearingInnerRing = 3;
-BearingOuterRadius = bearingOuterDiameter(608)/2;
-BearingHeight = bearingWidth(608);
+BearingModel = 608;
+BearingInnerRadius = bearingInnerDiameter(BearingModel)/2;
+BearingDistanceRing = 3;
+BearingOuterRadius = bearingOuterDiameter(BearingModel)/2;
+BearingHeight = bearingWidth(BearingModel);
 
 SpoolCoreLenght = 30;
 RingHeight = 1.5;
@@ -19,10 +20,15 @@ SpoolHeight = SpoolCoreLenght+2*BoarderThickness; //total spool hight
 // ------ top level geometry --------
 spool();
 //functions
-function get_OuterRadius() = OuterRadius;
-function get_InnerRadius() = InnerRadius;
+function get_SpoolOuterRadius() = OuterRadius;
+function get_SpoolInnerRadius() = InnerRadius;
 function get_SpoolCoreLenght() = SpoolCoreLenght;
-function get_BoarderThickness() = BoarderThickness;
+function get_SpoolBoarderThickness() = BoarderThickness;
+function get_SpoolUsedBearingModel() = BearingModel;
+function get_SpoolBearingDistanceRing() = BearingDistanceRing;
+
+
+
 // modules
 module spool()
 {
@@ -65,8 +71,8 @@ module rollBoarder()
 
 module bearingInnerPart()
 {
-    cylinder(BearingHeight+BearingInnerRing, BearingInnerRadius, BearingInnerRadius);
-    cylinder(BearingInnerRing,BearingInnerRadius+1,BearingInnerRadius+1);
+    cylinder(BearingHeight+BearingDistanceRing, BearingInnerRadius, BearingInnerRadius);
+    cylinder(BearingDistanceRing,BearingInnerRadius+1,BearingInnerRadius+1);
 }
 
 module ropeHole()

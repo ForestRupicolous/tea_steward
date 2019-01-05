@@ -12,12 +12,12 @@ use <../vitamins/bearing.scad>;
 $fn = 10; //10 for development /80
 
 //variables == constants
-SpoolLenght = get_SpoolCoreLenght()+2*get_BoarderThickness(); //total spool lenght
-DefaultHolderHeight = 2*(get_OuterRadius()+get_InnerRadius());
-HolderWidth = 2*(get_OuterRadius()+get_InnerRadius());
-DefaultHolderThickness = BearingHeight;
-HolderAxis= (get_OuterRadius()+get_InnerRadius());
-BlockLenght = SpoolLenght+2*DefaultHolderThickness+2*BearingInnerRing;
+SpoolLenght = get_SpoolCoreLenght()+2*get_SpoolBoarderThickness(); //total spool lenght
+DefaultHolderHeight = 2*(get_SpoolOuterRadius()+get_SpoolInnerRadius());
+HolderWidth = 2*(get_SpoolOuterRadius()+get_SpoolInnerRadius());
+DefaultHolderThickness = bearingWidth(get_SpoolUsedBearingModel())-0.1;
+HolderAxis= (get_SpoolOuterRadius()+get_SpoolInnerRadius());
+BlockLenght = SpoolLenght+2*DefaultHolderThickness+2*get_SpoolBearingDistanceRing();
 BlockWidth = HolderWidth;
 BlockThickness = 5;
 echo(BlockLenght);
@@ -40,7 +40,7 @@ stepperHolder();
 //modules
 module SpoolAndHolder()
 {
-    translate([HolderWidth/2,DefaultHolderThickness+BearingInnerRing,HolderAxis]) rotate([-90,0,0]) //deactivate for printing
+    translate([HolderWidth/2,DefaultHolderThickness+get_SpoolBearingDistanceRing(),HolderAxis]) rotate([-90,0,0]) //deactivate for printing
         spool();
     spoolHolder();
 }
@@ -70,10 +70,6 @@ module mainHolder()
 }
 
 
-
-
-
-
 module spoolHolder()
 {
     //Mounting block
@@ -85,20 +81,33 @@ module spoolHolder()
         
         translate([HolderWidth/2, -0.01, HolderAxis])
             rotate([-90,0,0])
-                bearingHole();
+                bearing(get_SpoolUsedBearingModel(),outline=true);
 
 
 
             
     }
-    translate([0,SpoolLenght+DefaultHolderThickness+2*BearingInnerRing,0])
+    //show bearing
+    translate([HolderWidth/2, -0.01, HolderAxis])
+        rotate([-90,0,0])
+            bearing(get_SpoolUsedBearingModel());
+
+
+    translate([0,SpoolLenght+DefaultHolderThickness+2*get_SpoolBearingDistanceRing(),0])
+    {
         difference()
         {
             holderBlock(HolderHeight = 30);
             translate([HolderWidth/2, -0.01, HolderAxis])
                 rotate([-90,0,0])
-                    bearingHole();
+                    bearing(get_SpoolUsedBearingModel(),outline=true);
         }
+        //show bearing
+        translate([HolderWidth/2, -0.01, HolderAxis])
+            rotate([-90,0,0])
+                bearing(get_SpoolUsedBearingModel());
+    }
+
     //Bearing Hole
     //InnerBearing
     //Motor Hole
