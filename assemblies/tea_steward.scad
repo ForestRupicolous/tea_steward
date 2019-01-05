@@ -8,6 +8,7 @@
 //includes
 use <../vitamins/stepper_28BYJ.scad>; //use doesn't executes functions in the file
 use <../parts/spool.scad>;
+use <../vitamins/bearing.scad>;
 $fn = 10; //10 for development /80
 
 //variables == constants

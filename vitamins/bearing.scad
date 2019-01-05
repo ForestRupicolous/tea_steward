@@ -1,4 +1,5 @@
 //from: https://github.com/openscad/MCAD/blob/master/bearing.scad
+//commit 5246f78d34904f728f49ea4ea30faa5041abc592
 /*
  * Bearing model.
  *
@@ -7,8 +8,8 @@
  */
 
 
-include <units.scad>
-include <materials.scad>
+include <MCAD/units.scad>
+include <MCAD/materials.scad>
 
 // Example, uncomment to view
 //test_bearing();
