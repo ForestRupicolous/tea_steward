@@ -42,7 +42,7 @@ module spool()
         
     }
     //bearing holders
-    rotate([180,0,0])   bearingInnerPart();
+    //rotate([180,0,0])   bearingInnerPart();
 
     translate([0,0,SpoolHeight])    bearingInnerPart();
        

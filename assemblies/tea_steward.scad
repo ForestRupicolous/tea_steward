@@ -40,8 +40,8 @@ stepperHolder();
 //modules
 module SpoolAndHolder()
 {
-    //translate([HolderWidth/2,DefaultHolderThickness+get_SpoolBearingDistanceRing(),HolderAxis]) rotate([-90,0,0]) //deactivate for printing
-    //    spool();
+    translate([HolderWidth/2,DefaultHolderThickness+get_SpoolBearingDistanceRing(),HolderAxis]) rotate([-90,0,0]) //deactivate for printing
+        spool();
     spoolHolder();
 }
 
@@ -54,7 +54,7 @@ module SpoolAndHolder()
 
 module stepperHolder()
 {
-    translate([HolderWidth/2, -1.49, HolderAxis+8]) //8 is shift of axis to mounting points
+    translate([HolderWidth/2, -1.49+DefaultHolderThickness, HolderAxis+8]) //8 is shift of axis to mounting points
         rotate([90,-90,180])
             28BYJ();
 }
@@ -74,24 +74,8 @@ module spoolHolder()
 {
     //Mounting block
     mountingBlock();
-    difference()
-    {
-        translate([0,-5,0])
-            holderBlock(DefaultHolderThickness+5);
-        
-        translate([HolderWidth/2, -0.01, HolderAxis])
-            rotate([-90,0,0])
-                bearing(get_SpoolUsedBearingModel(),outline=true);
-
-
-
-            
-    }
-    //show bearing
-    translate([HolderWidth/2, -0.01, HolderAxis])
-        rotate([-90,0,0])
-            bearing(get_SpoolUsedBearingModel());
-
+    //holds the stepper
+    holderBlock(DefaultHolderThickness);
 
     translate([0,SpoolLenght+DefaultHolderThickness+2*get_SpoolBearingDistanceRing(),0])
     {
