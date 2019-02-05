@@ -1,7 +1,7 @@
 # Tea steward
 3D printed automatic tea steeper designed in OpenSCAD
 ![TeaSteward](https://raw.githubusercontent.com/ForestRupicolous/tea_steward/master/Tea_Steward_View.png)  
-generated on 05.01.2019   
+  
 
 Uses OpenSCAD MCAD library from: https://github.com/openscad/MCAD  
   
@@ -23,6 +23,9 @@ enter in Terminal (e.g. directly in VS code)
 When preview has errors switch view mode (F12)  
 
 https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/FAQ#How_can_I_export_multiple_parts_from_one_script?
+
+Get rid of left bearing
+
 ### export parts as STL
     openscad -DPARTNO=1 -o tree.stl model.scad
     openscad -DPARTNO=2 -o trunk.stl model.scad

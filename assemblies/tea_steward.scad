@@ -9,7 +9,7 @@
 use <../vitamins/stepper_28BYJ.scad>; //use doesn't executes functions in the file
 use <../parts/spool.scad>;
 use <../vitamins/bearing.scad>;
-$fn = 10; //10 for development /80
+$fn = 80; //10 for development /80
 
 //variables == constants
 SpoolLenght = get_SpoolCoreLenght()+2*get_SpoolBoarderThickness(); //total spool lenght
@@ -40,8 +40,8 @@ stepperHolder();
 //modules
 module SpoolAndHolder()
 {
-    translate([HolderWidth/2,DefaultHolderThickness+get_SpoolBearingDistanceRing(),HolderAxis]) rotate([-90,0,0]) //deactivate for printing
-        spool();
+    //translate([HolderWidth/2,DefaultHolderThickness+get_SpoolBearingDistanceRing(),HolderAxis]) rotate([-90,0,0]) //deactivate for printing
+    //    spool();
     spoolHolder();
 }
 
