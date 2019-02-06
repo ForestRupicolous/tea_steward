@@ -2,15 +2,15 @@
 use <../vitamins/bearing.scad>;
 
 //variables
-OuterRadius = 16;
-InnerRadius = 8;
+OuterRadius = 14;
+InnerRadius = 7;
 BearingModel = 608;
 BearingInnerRadius = bearingInnerDiameter(BearingModel)/2;
 BearingDistanceRing = 3;
 BearingOuterRadius = bearingOuterDiameter(BearingModel)/2;
 BearingHeight = bearingWidth(BearingModel);
 
-SpoolCoreLenght = 30;
+SpoolCoreLenght = 25;
 RingHeight = 1.5;
 BoarderThickness = 3;
 RopeRadius = 0.8;

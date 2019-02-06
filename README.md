@@ -26,9 +26,10 @@ https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/FAQ#How_can_I_export_multiple
 
 
 ### export parts as STL
-    openscad -DPARTNO=1 -o tree.stl model.scad
-    openscad -DPARTNO=2 -o trunk.stl model.scad
-    openscad -DPARTNO=3 -o base.stl model.scad
+    openscad -DPARTNO=1 -o Tea_Steward_spool.stl assemblies/tea_steward.scad
+    openscad -DPARTNO=4 -o Tea_Steward_mountingBlock.stl assemblies/tea_steward.scad
+    openscad -DPARTNO=2 -o Tea_Steward_stepperHolder.stl assemblies/tea_steward.scad
+    openscad -DPARTNO=3 -o Tea_Steward_spoolHolder.stl assemblies/tea_steward.scad
  
 ### export image of all the parts combined
     openscad -DPARTNO=0 -o model.png model.scad
