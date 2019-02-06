@@ -38,6 +38,12 @@ if(PARTNO == 0)
     }
     //show stepper
     stepper();
+
+            //show bearing
+    translate([0,SpoolLenght+DefaultHolderThickness+2*get_SpoolBearingDistanceRing(),0])
+       translate([HolderWidth/2, -0.01, HolderAxis])
+          rotate([-90,0,0])
+               bearing(get_SpoolUsedBearingModel());
 //electricHolder();
 }
 //Spool with hole
@@ -131,10 +137,6 @@ module spoolHolder()
                 rotate([-90,0,0])
                     bearing(get_SpoolUsedBearingModel(),outline=true);
         }
-        //show bearing
-        translate([HolderWidth/2, -0.01, HolderAxis])
-            rotate([-90,0,0])
-                bearing(get_SpoolUsedBearingModel());
     }
 }
 
