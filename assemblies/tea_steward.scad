@@ -78,9 +78,10 @@ module SpoolAndHolders()
 {
     translate([HolderWidth/2,DefaultHolderThickness+get_SpoolBearingDistanceRing(),HolderAxis]) rotate([-90,0,0]) //deactivate for printing
         spool();
+    mountingBlock();
     stepperHolder();
     spoolHolder();
-    mountingBlock();
+    
 }
 
 //Outer shell
