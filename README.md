@@ -17,7 +17,7 @@ See https://medium.com/@urish/designing-3d-printable-mechanisms-in-openscad-5838
 ## Create updated image
 enter in Terminal (e.g. directly in VS code)
 
-    openscad -o Tea_Steward_View.png assemblies/tea_steward.scad  --camera=200,200,100,0,0,10
+    openscad -DPARTNO=0 -o Tea_Steward_View.png assemblies/tea_steward.scad  --camera=200,200,100,0,0,10
 
 ## Idea collection  
 When preview has errors switch view mode (F12)  

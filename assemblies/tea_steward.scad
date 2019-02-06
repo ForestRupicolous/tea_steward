@@ -12,7 +12,7 @@ use <../vitamins/bearing.scad>;
 $fn = 80; //10 for development /80
 
 //use this to enable different parts/views 0=ALL (not for print)
-PARTNO = 4;
+PARTNO = 0;
 
 //variables == constants
 SpoolLenght = get_SpoolCoreLenght()+2*get_SpoolBoarderThickness(); //total spool lenght
