@@ -22,7 +22,7 @@ DefaultHolderThickness = bearingWidth(get_SpoolUsedBearingModel())-0.1;
 HolderAxis= (get_SpoolOuterRadius()+get_SpoolInnerRadius());
 BlockLenght = SpoolLenght+2*DefaultHolderThickness+2*get_SpoolBearingDistanceRing();
 BlockWidth = HolderWidth+10;
-BlockThickness = 5;
+BlockThickness = 10;
 echo(BlockLenght);
 echo(BlockWidth);
 echo(BlockThickness);
@@ -101,7 +101,7 @@ module stepper()
 {
     translate([HolderWidth/2, -1.49+DefaultHolderThickness, HolderAxis+8]) //8 is shift of axis to mounting points
         rotate([90,-90,180])
-            28BYJ();
+            scale([1.05,1.05,1]) 28BYJ();
 }
 
 //Holds the stepper
@@ -144,13 +144,13 @@ module mountingBlock()
  {
     difference()
     {
-        translate([-5,0,0])
+        translate([-5,-5,-BlockThickness/2])
             difference()
             {
-                cube([BlockWidth, BlockLenght, BlockThickness]);
+                cube([BlockWidth, BlockLenght+10, BlockThickness]);
                 //remove hole in middle
-                translate([BlockWidth/6,BlockLenght/4,0])
-                    cube([2*BlockWidth/3, BlockLenght/2,BlockThickness]);
+                translate([BlockWidth/6,BlockLenght/4+2.5,0])
+                    cube([2*BlockWidth/3, BlockLenght/2+5,BlockThickness]);
             }
         stepperHolder();
         spoolHolder();
