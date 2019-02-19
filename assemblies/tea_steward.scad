@@ -23,9 +23,7 @@ HolderAxis= (get_SpoolOuterRadius()+get_SpoolInnerRadius());
 BlockLenght = SpoolLenght+2*DefaultHolderThickness+2*get_SpoolBearingDistanceRing();
 BlockWidth = HolderWidth+10;
 BlockThickness = 10;
-echo(BlockLenght);
-echo(BlockWidth);
-echo(BlockThickness);
+echo(PARTNO);
 
 //###########
 //top level
@@ -152,8 +150,8 @@ module mountingBlock()
                 translate([BlockWidth/6,BlockLenght/4+2.5,0])
                     cube([2*BlockWidth/3, BlockLenght/2+5,BlockThickness]);
             }
-        stepperHolder();
-        spoolHolder();
+        scale([1.05,1,1]) stepperHolder();  //scale for tolerance, sifts holder from middle
+        scale([1.05,1,1]) spoolHolder();
     }
  }
 
