@@ -99,7 +99,7 @@ module stepper()
 {
     translate([HolderWidth/2, -1.49+DefaultHolderThickness, HolderAxis+8]) //8 is shift of axis to mounting points
         rotate([90,-90,180])
-            scale([1.05,1.05,1]) 28BYJ();
+            28BYJ();
 }
 
 //Holds the stepper
