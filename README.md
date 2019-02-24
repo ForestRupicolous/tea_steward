@@ -33,3 +33,6 @@ https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/FAQ#How_can_I_export_multiple
  
 ### export image of all the parts combined
     openscad -DPARTNO=0 -o model.png model.scad
+
+##CODE:  
+Digispark Pin P5 not connected to program (RESET?!)
