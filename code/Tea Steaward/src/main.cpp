@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <CheapStepper.h>
 
-CheapStepper stepper (5,6,7,1); 
+CheapStepper stepper (5,6,7,3); 
 // here we declare our stepper using default pins:
 // arduino pin <--> pins on ULN2003 board:
 // 8 <--> IN1
@@ -16,18 +16,13 @@ boolean moveClockwise = true;
 void setup() {
   
   // let's just set up a serial connection and test print to the console
-  pinMode(0, OUTPUT);
 }
 
 void loop() {
 
   // let's move a full rotation (4096 mini-steps)
   // we'll go step-by-step using the step() function
-    digitalWrite(0,HIGH); //Turn the pin HIGH (5 V)
-    delay(1000);
-    digitalWrite(0,LOW); //Turn the pin LOW (GND)
-    delay(1000);
-  for (int s=0; s<4096; s++){
+   for (int s=0; s<4096; s++){
     // this will loop 4096 times
     // 4096 steps = full rotation using default values
     /* Note:
