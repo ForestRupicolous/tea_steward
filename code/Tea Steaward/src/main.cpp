@@ -6,7 +6,7 @@
 #endif
 
 
-CheapStepper stepper (5,6,7,3); 
+CheapStepper stepper (0,1,2,4); 
 // here we declare our stepper using default pins:
 // arduino pin <--> pins on ULN2003 board:
 // 8 <--> IN1
