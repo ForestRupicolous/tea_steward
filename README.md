@@ -36,3 +36,17 @@ https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/FAQ#How_can_I_export_multiple
 
 ##CODE:  
 Digispark Pin P5 not connected to program (RESET?!)
+
+====== Digispark Pin Usage Guide ======
+
+This table details the function of each pin on the Digispark and any notes the are relevant.
+
+^  Pin \\ Number  ^  Output \\ Voltage  ^  Analogue Port Number \\ ''analogRead()''  ^  PWM  ^  USB  ^  Test \\ LED  ^  I2C  ^  SPI*  ^
+|0          |5 V            |                     |Y - 504 Hz |                   |Rev 1    |SDA  |  MISO  |
+|1          |5 V            |                     |Y - 504 Hz |                   |Rev 2 / 4|     |  MOSI  |
+|2          |5 V            |1                    |           |                   |         |SCL  |  SCK   |
+|3          |3.6 V          |3                    |           |Y - 1.5k Ohm to 5 V \\ Zener diode (3.6 V maximum in- & output) | |
+|4          |3.6 V          |2                    |Y - 1007 Hz|Y \\ Zener diode (3.6 V maximum in- & output)   | | |
+|5          |3 V            |0                    |           |                   |         |     |
+
+* Note that the labeling of the pins for SPI is somewhat misleading. The table above is correct, as MISO is actually DI and MOSI is DO, but for use with ISP MISO and MOSI are swapped.

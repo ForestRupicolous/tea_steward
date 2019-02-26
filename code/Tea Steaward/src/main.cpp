@@ -38,21 +38,11 @@ void loop() {
      * true for clockwise, false for counter-clockwise
      * -- you could also say stepper.stepCW(); or stepper.stepCCW();
      */
-
-    // now let's get the current step position of motor
-    
-    int nStep = stepper.getStep();
-
-    // and if it's divisible by 64...
-      }
-
-  // now we've moved 4096 steps
-  
-  // let's wait one second
-  
+     }
+  // now we've moved 4096 steps  
+  // let's wait one second  
   delay(1000);
 
   // and switch directions before starting loop() again
-  
   moveClockwise = !moveClockwise;
 }
