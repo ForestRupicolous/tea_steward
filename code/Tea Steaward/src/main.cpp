@@ -14,7 +14,10 @@ CheapStepper stepper (0,1,2,4);
 // 10 <--> IN3
 // 11 <--> IN4
 
+void turnOffStepper();
 boolean moveClockwise = true;
+
+int numRotations = 3;
 
 //Neopixel ++++++++++++++++++++++++++
 // Which pin on the Arduino is connected to the NeoPixels?
@@ -30,9 +33,13 @@ boolean moveClockwise = true;
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 int delayval = 500; // delay for half a second
+
+int rotSpeed = 17;
 //End Neopixel defines +++++++++++++++++++++++++
 void setup() {
   
+  stepper.setRpm(rotSpeed);
+
   pixels.begin(); // This initializes the NeoPixel library.
 
   //setup test, move this to code after inital neopixel test run
@@ -41,33 +48,42 @@ void setup() {
     // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
     pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
   }
+
+  stepper.newMoveTo(moveClockwise,4076);
+
 }
 
 void loop() {
 
-  // let's move a full rotation (4096 mini-steps)
-  // we'll go step-by-step using the step() function
-   for (int s=0; s<4096; s++){
-    // this will loop 4096 times
-    // 4096 steps = full rotation using default values
-    /* Note:
-     * you could alternatively use 4076 steps... 
-     * if you think your 28BYJ-48 stepper's internal gear ratio is 63.68395:1 (measured) rather than 64:1 (advertised)
-     * for more info, see: http://forum.arduino.cc/index.php?topic=71964.15)
-     */
+  stepper.run();
+  //DO stuff here
+  //
 
-    // let's move one "step" (of the 4096 per full rotation)
-    
-    stepper.step(moveClockwise);
-    /* the direction is based on moveClockwise boolean:
-     * true for clockwise, false for counter-clockwise
-     * -- you could also say stepper.stepCW(); or stepper.stepCCW();
-     */
-     }
-  // now we've moved 4096 steps  
-  // let's wait one second  
-  delay(1000);
 
-  // and switch directions before starting loop() again
-  moveClockwise = !moveClockwise;
+  int stepsLeft = stepper.getStepsLeft();
+  if (stepsLeft == 0){//move is done
+    if(numRotations > 0) 
+    { 
+      delay(200);
+      numRotations--;
+      stepper.newMoveTo(moveClockwise,4076); //do another round in the same direction
+    }
+    else
+    {
+      // let's start a new move in the reverse direction
+      delay(1000);
+      numRotations = 3;
+      moveClockwise = !moveClockwise; // reverse direction
+      stepper.newMoveTo(moveClockwise,4076); //do another round
+    }
+
+  }
+}
+
+void turnOffStepper()
+{
+  for (int i=0; i<4; i++)
+  {
+    digitalWrite(stepper.getPin(i), 0);
+  }
 }
