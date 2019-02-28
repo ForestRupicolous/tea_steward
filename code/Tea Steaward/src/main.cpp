@@ -5,7 +5,9 @@
   #include <avr/power.h>
 #endif
 
-
+#define BLACKTEATIME 180000//1000*60*3 Mins
+#define DEBUGTIME 20000 //20 s 
+#define BOOTLOADERDELAY 5000
 CheapStepper stepper (0,1,2,4); 
 // here we declare our stepper using default pins:
 // arduino pin <--> pins on ULN2003 board:
@@ -18,7 +20,8 @@ void turnOffStepper();
 boolean moveClockwise = true;
 
 int numRotations = 3;
-
+int currentState = 0;
+int stepsLeft = 0;
 //Neopixel ++++++++++++++++++++++++++
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1
@@ -33,6 +36,11 @@ int numRotations = 3;
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 int delayval = 500; // delay for half a second
+
+unsigned long startTime;
+unsigned long teaTime;
+unsigned long currentMillis;
+
 
 int rotSpeed = 17;
 //End Neopixel defines +++++++++++++++++++++++++
@@ -49,34 +57,68 @@ void setup() {
     pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
   }
 
-  stepper.newMoveTo(moveClockwise,4076);
+  startTime = millis(); //+ BOOTLOADERDELAY; //store start Time and add 5 seconds (bootloader delay)
 
 }
 
 void loop() {
-
   stepper.run();
-  //DO stuff here
-  //
 
+  currentMillis = millis();
+  switch (currentState)
+  {
+    case 0:
+      //up and wait//
+      if(currentMillis - startTime > 3000)
+      {
+        moveClockwise = true; //go down
+        numRotations = 2; 
+        stepper.newMove(moveClockwise,4076);//start moving
+        currentState = 1;
+      }
+      break;
 
-  int stepsLeft = stepper.getStepsLeft();
+    case 1:
+      //down position reached
+      if((numRotations == 1) && (stepsLeft == 0))
+      {
+        teaTime = currentMillis;
+        currentState = 2;
+      }
+      break;
+
+    case 2:
+      //time to go up
+      if(currentMillis - teaTime > DEBUGTIME)//tea ready
+      {
+        moveClockwise = false; //go up
+        numRotations = 2; 
+        stepper.newMove(moveClockwise,4076);//start moving
+        currentState = 3;
+      }
+      break;
+
+    case 3:
+      //up position reached
+      if((numRotations == 1) && (stepsLeft == 0))
+      {
+        currentState = 4;
+      }
+      break;
+
+    default:
+      turnOffStepper();
+      break;
+  }
+
+  stepsLeft = stepper.getStepsLeft();
   if (stepsLeft == 0){//move is done
-    if(numRotations > 0) 
+    if(numRotations > 1) 
     { 
       delay(200);
       numRotations--;
-      stepper.newMoveTo(moveClockwise,4076); //do another round in the same direction
+      stepper.newMove(moveClockwise,4076); //do another round in the same direction
     }
-    else
-    {
-      // let's start a new move in the reverse direction
-      delay(1000);
-      numRotations = 3;
-      moveClockwise = !moveClockwise; // reverse direction
-      stepper.newMoveTo(moveClockwise,4076); //do another round
-    }
-
   }
 }
 
