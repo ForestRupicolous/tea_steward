@@ -16,13 +16,13 @@ PARTNO = 0;
 
 //variables == constants
 SpoolLenght = get_SpoolCoreLenght()+2*get_SpoolBoarderThickness(); //total spool lenght
-DefaultHolderHeight = 2*(get_SpoolOuterRadius()+get_SpoolInnerRadius());
-HolderWidth = 2*(get_SpoolOuterRadius()+get_SpoolInnerRadius());
+BlockThickness = 10;
+DefaultHolderHeight = 2*(get_SpoolOuterRadius())+BlockThickness;
+HolderWidth = 2*(get_SpoolOuterRadius())+2;
 DefaultHolderThickness = bearingWidth(get_SpoolUsedBearingModel())-0.1;
-HolderAxis= (get_SpoolOuterRadius()+get_SpoolInnerRadius());
+HolderAxis=  get_SpoolOuterRadius();
 BlockLenght = SpoolLenght+2*DefaultHolderThickness+2*get_SpoolBearingDistanceRing();
 BlockWidth = HolderWidth+10;
-BlockThickness = 10;
 echo(PARTNO);
 
 //###########
@@ -107,7 +107,7 @@ module stepperHolder()
 {
     difference()
     {    
-        holderBlock(DefaultHolderThickness);
+        holderBlock(DefaultHolderThickness, DefaultHolderHeight-20);
         stepper();
     }
 }
@@ -152,6 +152,16 @@ module mountingBlock()
             }
         scale([1.05,1,1]) stepperHolder();  //scale for tolerance, sifts holder from middle
         scale([1.05,1,1]) spoolHolder();
+    }
+
+    //electrical holder
+    difference()
+    {
+    translate([-5,-40,-BlockThickness/2])
+        cube([BlockWidth,40,BlockThickness/2]);
+    translate([0,-20,-BlockThickness/3])
+        cube([34,2,10]);
+    
     }
  }
 
