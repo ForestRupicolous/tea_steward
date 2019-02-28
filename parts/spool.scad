@@ -2,15 +2,15 @@
 use <../vitamins/bearing.scad>;
 
 //variables
-OuterRadius = 14;
-InnerRadius = 7;
+OuterRadius = 27;
+InnerRadius = 25;
 BearingModel = 608;
 BearingInnerRadius = bearingInnerDiameter(BearingModel)/2;
 BearingDistanceRing = 3;
 BearingOuterRadius = bearingOuterDiameter(BearingModel)/2;
 BearingHeight = bearingWidth(BearingModel);
 
-SpoolCoreLenght = 25;
+SpoolCoreLenght = 14;
 RingHeight = 1.5;
 BoarderThickness = 3;
 RopeRadius = 0.8;
@@ -36,7 +36,7 @@ module spool()
     {
         //mainpart
         mainRoll();
-        translate([0,0,SpoolHeight/2+BoarderThickness])
+        translate([0,0,SpoolHeight/2])
             rotate([90,0,0])
                 ropeHole();
         
