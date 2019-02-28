@@ -8,6 +8,8 @@
 #define BLACKTEATIME 180000//1000*60*3 Mins
 #define DEBUGTIME 20000 //20 s 
 #define BOOTLOADERDELAY 5000
+#define FULLROTATIONSTEPS 4096
+
 CheapStepper stepper (0,1,2,4); 
 // here we declare our stepper using default pins:
 // arduino pin <--> pins on ULN2003 board:
@@ -73,7 +75,7 @@ void loop() {
       {
         moveClockwise = true; //go down
         numRotations = 2; 
-        stepper.newMove(moveClockwise,4076);//start moving
+        stepper.newMove(moveClockwise,FULLROTATIONSTEPS);//start moving
         currentState = 1;
       }
       break;
@@ -89,11 +91,11 @@ void loop() {
 
     case 2:
       //time to go up
-      if(currentMillis - teaTime > DEBUGTIME)//tea ready
+      if(currentMillis - teaTime > BLACKTEATIME)//tea ready
       {
         moveClockwise = false; //go up
         numRotations = 2; 
-        stepper.newMove(moveClockwise,4076);//start moving
+        stepper.newMove(moveClockwise,FULLROTATIONSTEPS);//start moving
         currentState = 3;
       }
       break;
@@ -102,10 +104,21 @@ void loop() {
       //up position reached
       if((numRotations == 1) && (stepsLeft == 0))
       {
+        teaTime = currentMillis;
         currentState = 4;
+        turnOffStepper();
       }
       break;
+    case 4:
+    //timing test
+      digitalWrite(1, moveClockwise);
+      if(currentMillis - teaTime > 10000)//toggle every 10 s
+      {
+        teaTime = currentMillis;
+        moveClockwise = !moveClockwise;
+      }
 
+      break;
     default:
       turnOffStepper();
       break;
@@ -117,7 +130,7 @@ void loop() {
     { 
       delay(200);
       numRotations--;
-      stepper.newMove(moveClockwise,4076); //do another round in the same direction
+      stepper.newMove(moveClockwise,FULLROTATIONSTEPS); //do another round in the same direction
     }
   }
 }
