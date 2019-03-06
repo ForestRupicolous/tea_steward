@@ -31,8 +31,7 @@ https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/FAQ#How_can_I_export_multiple
     openscad -DPARTNO=2 -o Tea_Steward_stepperHolder.stl assemblies/tea_steward.scad
     openscad -DPARTNO=3 -o Tea_Steward_spoolHolder.stl assemblies/tea_steward.scad
  
-### export image of all the parts combined
-    openscad -DPARTNO=0 -o model.png model.scad
+
 
 ##CODE:  
 Digispark Pin P5 not connected to program (RESET?!)
